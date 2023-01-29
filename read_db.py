@@ -1,6 +1,6 @@
 from config import NOTION_TOKEN, DATABASE_ID
 from notion_client import Client
-from datetime import datetime
+from datetime import datetime, timedelta
 from pprint import pprint
 
 import pandas as pd
@@ -39,7 +39,62 @@ for result in data['results']:
     arranged_data.append(chunk)
 
 df = pd.DataFrame(arranged_data)
-df.set_index("date", inplace=True)
-print(type(df.loc[date_time_obj]))
 
+# filter data
+today = datetime.today().date()
+
+yesterday = (datetime.today() - timedelta(1)).date()
+is_yesterday = df['date'] == yesterday
+df_yesterday = df[is_yesterday]
+
+print("어제 배운 문장 (" + yesterday.strftime('%Y-%m-%d') +")")
+if len(df_yesterday) > 0:
+    data_yesterday = {}
+    for i in range(len(df_yesterday)-1, -1, -1):
+        print("- 영어: " + df_yesterday.iloc[i]['eng'])
+        print("- 해석: " + df_yesterday.iloc[i]['kor'])
+        print("- 블로그: " + df_yesterday.iloc[i]['blog'])
+        print("- 유튜브: " + df_yesterday.iloc[i]['youtube'])
+        print()
+else:
+    print("- 배운 문장이 없습니다!")
+    print()
+
+
+a_week_ago = (datetime.today() - timedelta(7)).date()
+is_a_week_ago = df['date'] == a_week_ago
+df_a_week_ago = df[is_a_week_ago]
+
+print("일주일 전에 배운 문장 (" + a_week_ago.strftime('%Y-%m-%d') +")")
+if len(df_a_week_ago) > 0:
+    data_a_week_ago = {}
+    for i in range(len(df_a_week_ago)-1, -1, -1):
+        print("- 영어: " + df_a_week_ago.iloc[i]['eng'])
+        print("- 해석: " + df_a_week_ago.iloc[i]['kor'])
+        print("- 블로그: " + df_a_week_ago.iloc[i]['blog'])
+        print("- 유튜브: " + df_a_week_ago.iloc[i]['youtube'])
+        print()
+else:
+    print("- 배운 문장이 없습니다!")
+    print()
+    
+
+a_month_ago = (datetime.today() - timedelta(30)).date()
+is_a_month_ago = df['date'] == a_month_ago
+df_a_month_ago = df[is_a_month_ago]
+print("한달 전에 배운 문장 (" + a_month_ago.strftime('%Y-%m-%d') +")")
+
+if len(df_a_month_ago) > 0:
+    data_a_month_ago = {}
+    for i in range(len(df_a_month_ago)-1, -1, -1):
+        print("- 영어: " + df_a_month_ago.iloc[i]['eng'])
+        print("- 해석: " + df_a_month_ago.iloc[i]['kor'])
+        print("- 블로그: " + df_a_month_ago.iloc[i]['blog'])
+        print("- 유튜브: " + df_a_month_ago.iloc[i]['youtube'])
+        print()
+else:
+    print("- 배운 문장이 없습니다!")
+    print()
+
+    
 # 모델 설계
