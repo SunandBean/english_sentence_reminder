@@ -30,7 +30,7 @@ class Viewer:
         if len(self.__contents) > 0:
             for content in self.__contents:
                 content_body += f"""
-                    <a href={content['link']} target = "_blank"> <h1>{content['date']} 에 배운 문장</h1> </a>
+                    <a href={content['link']} target = "_blank"> <h2>{content['date']} 에 배운 문장</h2> </a>
                     <ul>
                         {content['text']}
                     </ul>
@@ -38,7 +38,7 @@ class Viewer:
                 """
         else:
             content_body = f"""
-                <a href="https://blog.naver.com/sunandbean" target = "_blank"> <h1>공유할 문장이 없습니다! </h1> </a>
+                <a href="https://blog.naver.com/sunandbean" target = "_blank"> <h2>공유할 문장이 없습니다! </h2> </a>
                 <hr>
             """
 
