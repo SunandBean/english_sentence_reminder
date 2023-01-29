@@ -7,6 +7,7 @@ import pandas as pd
 
 notion = Client(auth=NOTION_TOKEN)
 
+# query data from notion
 data = notion.databases.query(DATABASE_ID)
 database_object = data['object']
 has_more = data['has_more']
@@ -17,22 +18,6 @@ while has_more:
         data['results'].append(row)
     has_more = data_while['has_more']
     next_cursor = data_while['next_cursor']
-
-
-# # Check data
-# for result in data['results']:
-#     for key, value in result['properties'].items():
-#         print("key: ", key)
-#         if value['type'] == 'date':
-#             print("value: " + value['date']['start'])
-#         elif value['type'] == 'url':
-#             print("value: " + value['url'])
-#         elif value['type'] == 'rich_text':
-#             print("value: " + value['rich_text'][0]['plain_text'])
-#         elif value['type'] == 'title':
-#             print("value: " + value['title'][0]['plain_text'])
-#         else:
-#             print("useless type")
 
 # arrange data
 arranged_data = []
@@ -54,6 +39,7 @@ for result in data['results']:
     arranged_data.append(chunk)
 
 df = pd.DataFrame(arranged_data)
-print(df)
+df.set_index("date", inplace=True)
+print(type(df.loc[date_time_obj]))
 
 # 모델 설계
