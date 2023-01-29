@@ -23,3 +23,12 @@ pip3 install -r requirements.txt
 You have to change the name of file `config_template.py` to `config.py` for running the `main.py`.
 
 And also you have to fill out the information in the `config.py`.
+
+## How to run
+``` bash
+python3 main.py
+```
+or after modifying the location in the `run_reminder.sh`
+``` bash
+./run_reminder.sh
+```
