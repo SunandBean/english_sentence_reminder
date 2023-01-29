@@ -3,8 +3,8 @@ import pandas as pd
 
 class Controller:
     def __init__(self, dataframe: pd.DataFrame):
-        self.__default_address = "https://blog.naver.com/sunandbean"
         self.__dataframe = dataframe
+        self.__default_address = "https://blog.naver.com/sunandbean"
         self.__start_date = datetime.today()
 
     def set_start_date(self, start_date: datetime):
