@@ -42,69 +42,56 @@ df = pd.DataFrame(arranged_data)
 
 # filter data
 today = datetime.today().date()
+blog_address = "https://blog.naver.com/sunandbean"
 
 yesterday = (datetime.today() - timedelta(1)).date()
 is_yesterday = df['date'] == yesterday
 df_yesterday = df[is_yesterday]
-
-print("어제 배운 문장 (" + yesterday.strftime('%Y-%m-%d') +")")
 text_yesterday = ""
 if len(df_yesterday) > 0:
     data_yesterday = {}
     for i in range(len(df_yesterday)-1, -1, -1):
-        print("- 영어: " + df_yesterday.iloc[i]['eng'])
-        print("- 해석: " + df_yesterday.iloc[i]['kor'])
-        print("- 블로그: " + df_yesterday.iloc[i]['blog'])
-        print("- 유튜브: " + df_yesterday.iloc[i]['youtube'])
-        print()
-        text_yesterday += f"- 영어: {df_yesterday.iloc[i]['eng']}\n - 해석: {df_yesterday.iloc[i]['kor']}\n - 블로그: {df_yesterday.iloc[i]['blog']}\n - 유튜브: {df_yesterday.iloc[i]['youtube']}\n\n"
+        text_yesterday += f"<h2>{df_yesterday.iloc[i]['eng']}</h2> \
+                            <h3>{df_yesterday.iloc[i]['kor']}</h3> <br>"
+    blog_yesterday = df_yesterday.iloc[0]['blog']
 else:
-    print("- 배운 문장이 없습니다!")
-    print()
-    text_yesterday += "- 배운 문장이 없습니다!\n"
+    text_yesterday += "<h2>배운 문장이 없습니다! </h2> <br>"
+    blog_yesterday = blog_address
 
 
 a_week_ago = (datetime.today() - timedelta(7)).date()
 is_a_week_ago = df['date'] == a_week_ago
 df_a_week_ago = df[is_a_week_ago]
-print("일주일 전에 배운 문장 (" + a_week_ago.strftime('%Y-%m-%d') +")")
 text_a_week_ago = ""
 if len(df_a_week_ago) > 0:
     data_a_week_ago = {}
     for i in range(len(df_a_week_ago)-1, -1, -1):
-        print("- 영어: " + df_a_week_ago.iloc[i]['eng'])
-        print("- 해석: " + df_a_week_ago.iloc[i]['kor'])
-        print("- 블로그: " + df_a_week_ago.iloc[i]['blog'])
-        print("- 유튜브: " + df_a_week_ago.iloc[i]['youtube'])
-        print()
-        text_a_week_ago += f"- 영어: {df_a_week_ago.iloc[i]['eng']}\ - 해석: {df_a_week_ago.iloc[i]['kor']}\n - 블로그: {df_a_week_ago.iloc[i]['blog']}\n - 유튜브: {df_a_week_ago.iloc[i]['youtube']}\n\n"
+        text_a_week_ago += f"<h2>{df_a_week_ago.iloc[i]['eng']}</h2> \
+                            <h3>{df_a_week_ago.iloc[i]['kor']}</h3> <br>"
+    blog_a_week_ago = df_yesterday.iloc[0]['blog']
 
 else:
-    print("- 배운 문장이 없습니다!")
-    print()
-    text_a_week_ago += "- 배운 문장이 없습니다!\n"
+    text_a_week_ago += "<h2>배운 문장이 없습니다!</h2> <br>"
+    blog_a_week_ago = blog_address
+
     
 
 a_month_ago = (datetime.today() - timedelta(30)).date()
 is_a_month_ago = df['date'] == a_month_ago
 df_a_month_ago = df[is_a_month_ago]
-print("한달 전에 배운 문장 (" + a_month_ago.strftime('%Y-%m-%d') +")")
 text_a_month_ago = ""
 if len(df_a_month_ago) > 0:
     data_a_month_ago = {}
     for i in range(len(df_a_month_ago)-1, -1, -1):
-        print("- 영어: " + df_a_month_ago.iloc[i]['eng'])
-        print("- 해석: " + df_a_month_ago.iloc[i]['kor'])
-        print("- 블로그: " + df_a_month_ago.iloc[i]['blog'])
-        print("- 유튜브: " + df_a_month_ago.iloc[i]['youtube'])
-        print()
-        text_a_month_ago += f"<h3>{df_a_month_ago.iloc[i]['eng']}</h3> \
-                            <h4>{df_a_month_ago.iloc[i]['kor']}</h4> <br>"
+        text_a_month_ago += f"<h2>{df_a_month_ago.iloc[i]['eng']}</h2> \
+                            <h3>{df_a_month_ago.iloc[i]['kor']}</h3> <br>"
+    blog_a_month_ago = df_yesterday.iloc[0]['blog']
+    
 
 else:
-    print("- 배운 문장이 없습니다!")
-    print()
-    text_a_month_ago += "- 배운 문장이 없습니다!\n"
+    text_a_month_ago += "<h2>배운 문장이 없습니다! </h2> <br>"
+    blog_a_month_ago = blog_address
+
 
 
 from config import NAVER_ID, NAVER_PW, RECIPIENTS
@@ -136,23 +123,22 @@ content = """
         </ul>
         <hr>
         <a href={link_a_month_ago} target = "_blank"> <h1>{title_a_month_ago}</h1> </a>
-        <h2>{date_a_month_ago}</h2>
         <ul>
             {content_a_month_ago}
         </ul>
     </body>
     </html>
 """.format(
-link_yesterday = df_yesterday.iloc[0]['blog'],
+link_yesterday = blog_yesterday,
 title_yesterday = f"어제({yesterday.strftime('%Y-%m-%d')}) 배운 문장",
 content_yesterday = text_yesterday,
 
-link_a_week_ago = df_yesterday.iloc[0]['blog'],
+link_a_week_ago = blog_a_week_ago,
 title_a_week_ago = f"일주일 전({a_week_ago.strftime('%Y-%m-%d')})에 배운 문장",
 content_a_week_ago = text_a_week_ago,
 
-link_a_month_ago = df_yesterday.iloc[0]['blog'],
-title_a_month_ago = '한달 전에 배운 문장',
+link_a_month_ago = blog_a_month_ago,
+title_a_month_ago = f"한달 전({a_month_ago.strftime('%Y-%m-%d')})에 배운 문장",
 content_a_month_ago = text_a_month_ago,
 )
 

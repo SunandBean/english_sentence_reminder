@@ -9,7 +9,7 @@ from email.mime.application import MIMEApplication
 recipients = RECIPIENTS
 
 message = MIMEMultipart()
-message['Subject'] = '메일 전송 테스트'
+message['Subject'] = '오늘 날짜 '+'메일 전송 테스트'
 message['From'] = f"{NAVER_ID}@naver.com"
 message['To'] = ",".join(recipients)
 
@@ -18,13 +18,19 @@ content = """
     <body>
         <h1>{title_yesterday}</h1>
         <h2>{date_yesterday}</h2>
-        <p>메일 전송 테스트입니다</p>
+        <p>
+            메일 전송 테스트입니다
+        </p>
         <h1>{title_a_week_ago}</h1>
         <h2>{date_a_week_ago}</h2>
-        <p>메일 전송 테스트입니다</p>
+        <p>
+            메일 전송 테스트입니다
+        </p>
         <h1>{title_a_month_ago}</h1>
         <h2>{date_a_month_ago}</h2>
-        <p>메일 전송 테스트입니다</p>
+        <p>
+            메일 전송 테스트입니다
+        </p>
     </body>
     </html>
 """.format(
