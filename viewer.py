@@ -16,7 +16,6 @@ class Viewer:
         self.__contents.append(content)
 
     def send_mail(self):
-        print("Send mail")
         message = MIMEMultipart()
         message['Subject'] = f"[{datetime.today().strftime('%Y-%m-%d')}] 영어 문장 리마인더"
         message['From'] = f"{self.__mail_id}@naver.com"
@@ -27,6 +26,7 @@ class Viewer:
             <body>
         """
 
+        content_body = ""
         if len(self.__contents) > 0:
             for content in self.__contents:
                 content_body += f"""
