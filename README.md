@@ -1,9 +1,13 @@
 # ENGLISH SENTENCE REMINDER
-For improving my english conversation skills, I made this project which repeatedly sends what I learned before.
+### For improving my english conversation skills, I made this project which repeatedly sends what I learned before.
 
 ![Reminder](./img/english_sentence_reminder.jpg)  
 - English sentences are located in the `Notion database`
 - Reminder mail is sent through `NAVER mail`
+
+### So you can learn things below in this repository.
+- How to query the information from `Notion database`
+- How to send the mail throught `NAVER mail`
 
 
 ## Preparations
