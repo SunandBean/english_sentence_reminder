@@ -15,7 +15,7 @@ If you want to set independent environment, you can use virtual environment like
 
 FYI, I run this project in `Python 3.9.13`
 
-``` python
+``` bash
 pip3 install -r requirements.txt
 ```
 
