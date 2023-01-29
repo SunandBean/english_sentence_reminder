@@ -7,7 +7,7 @@
 
 ### So you can learn things below in this repository.
 - How to query the information from `Notion database`
-- How to send the mail throught `NAVER mail`
+- How to send the mail through `NAVER mail`
 
 
 ## Preparations
