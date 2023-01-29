@@ -26,7 +26,7 @@ class Model:
 
     def __arrange(self) -> None:
         arranged_data = []
-        for result in self.__data['results']:
+        for result in self.__data:
             chunk = {}
             for key, value in result['properties'].items():
                 if key == "영어 문장":
