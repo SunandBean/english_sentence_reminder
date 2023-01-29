@@ -5,19 +5,19 @@ import pandas as pd
 
 class Model:
     def __init__(self, notion_token: str, database_id: str):
-        self._notion_client = Client(auth=notion_token)
-        self._database_id = database_id
+        self.__notion_client = Client(auth=notion_token)
+        self.__database_id = database_id
 
         self.__query()
         self.__arrange()
     
     def __query(self) -> None:
         # query data from notion
-        data = self._notion_client.databases.query(self._database_id)
+        data = self.__notion_client.databases.query(self.__database_id)
         has_more = data['has_more']
         next_cursor = data['next_cursor']
         while has_more:
-            data_while = self._notion_client.databases.query(self._database_id, start_cursor=next_cursor)
+            data_while = self.__notion_client.databases.query(self.__database_id, start_cursor=next_cursor)
             for row in data_while['results']:
                 data['results'].append(row)
             has_more = data_while['has_more']
