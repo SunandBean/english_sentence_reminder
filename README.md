@@ -8,6 +8,7 @@
 ### So you can learn things below in this repository.
 - How to query the information from `Notion database`
 - How to send the mail through `NAVER mail`
+  - [How to set naver mail for sending mail from python](https://sunandbean.tistory.com/416)
 
 
 ## Preparations
