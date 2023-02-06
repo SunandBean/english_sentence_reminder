@@ -25,6 +25,9 @@ You have to change the name of file `config_template.py` to `config.py` for runn
 
 And also you have to fill out the information in the `config.py`.
 
+> If you want to connect your google spread sheet for managing the mail list, bring the api key json file into the repository and change the name to `gspread_key.json`
+\
+> In that case, your customer list will be replaced to mail list in the google spread sheet.
 ## How to run
 ``` bash
 python3 main.py
