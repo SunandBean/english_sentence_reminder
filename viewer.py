@@ -19,7 +19,7 @@ class Viewer:
         message = MIMEMultipart()
         message['Subject'] = f"[{datetime.today().strftime('%Y-%m-%d')}] 영어 문장 리마인더"
         message['From'] = f"{self.__mail_id}@naver.com"
-        message['To'] = ",".join(self.__customers)
+        message['Bcc'] = ",".join(self.__customers)
 
         content_start = """
             <html>
